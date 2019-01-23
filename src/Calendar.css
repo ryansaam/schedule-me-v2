@@ -1,0 +1,47 @@
+.calendar {
+  width: 600px;
+  border-radius: 10px 10px;
+  padding: 20px;
+}
+
+#full-date-view {
+  font: 700 18px sans-serif;
+}
+#month-year-view {
+  font: 600 16px sans-serif;
+}
+
+.month-year-group {
+  transform-origin: 50% 128.5%;
+  transition: transform ease-in 300ms;
+}
+.month-year {
+  font: 600 16px sans-serif;
+  fill: black;
+}
+
+.week-day-names {
+  width: 100%;
+  border-radius: 10px 10px 0px 0px;
+  font-weight: 600;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+}
+
+.date-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+  width: 700px;
+}
+.date-node svg {
+  grid-row: 1/2;
+  grid-column: 1/2;
+}
+.date-node span {
+  font-weight: 600;
+  grid-row: 1/2;
+  grid-column: 1/2;
+}
