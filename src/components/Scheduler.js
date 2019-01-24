@@ -1,19 +1,25 @@
 import React, { useState } from 'react'
 import Calendar from './Calendar.js'
 import '../Calendar.css'
+const Form = props => { 
+  return <div style={{width: "100%"}}>{props.form}</div>
+}
 
 const Scheduler = props => {
   const [isOpen, setIsOpen] = useState(false)
+  const [nodeData, setNodeData] = useState(null)
+  const handleClick = (weekDay,month,date) => {
+    setIsOpen(!isOpen)
+    setNodeData({weekDay,month,date})
+  }
+  const form = React.cloneElement(props.form, {...nodeData})
   return (
     <div>
       <Calendar
         width={props.width}
         date={props.date}
         colors={props.colors}
-        handleClick={(weekDay,month,date) => {
-          setIsOpen(!isOpen)
-          console.log(weekDay,month,date)
-        }}
+        handleClick={handleClick}
       />
       <div 
         id="sch-modal"
@@ -29,7 +35,7 @@ const Scheduler = props => {
         }}
         onClick={() => setIsOpen(!isOpen)}
       >
-        { isOpen ? props.form : null }
+        { isOpen ? form : null }
       </div>
     </div>
   )

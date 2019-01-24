@@ -30,10 +30,10 @@ const input3 = ({ field, form }) => { return (
   </div>
 )}
 
-const MyForm = () => (
+const MyForm = ({weekDay,month,date}) => (
   <div id="sch-form" className="form-container">
     <h1 className="form-header">Scheduling on</h1>
-    <h1 className="form-header">Sep 5th</h1>
+    <h1 className="form-header">{`${weekDay}, ${month} ${date}`}</h1>
     <Formik
       initialValues={{ firstName: '', lastName: '', number: '' }}
       onSubmit={(values, { setSubmitting }) => {
