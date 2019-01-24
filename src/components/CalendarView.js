@@ -1,6 +1,6 @@
 import React from 'react'
 
-import DateNode from './DateNode.js'
+import DateNode, { NullDateNode } from './DateNode.js'
 
 export const WeekDayNames = props => {
   const names = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
@@ -19,6 +19,8 @@ export const WeekDayNames = props => {
 }
 
 export const DateGrid = props => {
+  const monthNames = ["January","Febuary","March","April","May","June","July","August","September","October","November","December"]
+  const weekDayNames = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
   const localDate = new Date()
   let radius = props.width / 7
   const renderedDate = props.date
@@ -26,12 +28,9 @@ export const DateGrid = props => {
   const colors = props.colors
   const dateNodes = dateData.map(el => {
     if (el.type === "leadDate") return (
-      <DateNode
-        textColor={colors.textColor}
+      <NullDateNode
         bgColor={colors.leadDate}
         key={el.id} radius={radius}
-        number={el.date}
-        handleClick={props.handleClick}
       />
     )
     if (
@@ -48,6 +47,10 @@ export const DateGrid = props => {
           radius={radius}
           number={el.date} 
           handleClick={props.handleClick}
+          month={renderedDate.getMonth()}
+          monthNames={monthNames}
+          year={renderedDate.getFullYear()}
+          weekDayNames={weekDayNames}
         />
       )
     }
@@ -58,7 +61,11 @@ export const DateGrid = props => {
         key={el.id} 
         radius={radius}
         number={el.date}
-        handleClick={props.handleClick} 
+        handleClick={props.handleClick}
+        month={renderedDate.getMonth()}
+        monthNames={monthNames}
+        year={renderedDate.getFullYear()}
+        weekDayNames={weekDayNames}
       />
     )
     if (el.type === "postDate") return (
@@ -69,6 +76,10 @@ export const DateGrid = props => {
         radius={radius}
         number={el.date}
         handleClick={props.handleClick}
+        month={(renderedDate.getMonth() + 1 !== 11) ? renderedDate.getMonth() + 1 : 0}
+        monthNames={monthNames}
+        weekDayNames={weekDayNames}
+        year={(renderedDate.getMonth() + 1 !== 11) ? renderedDate.getFullYear() : renderedDate.getFullYear() + 1}
       />
     )
     else { return null }

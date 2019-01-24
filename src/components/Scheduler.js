@@ -10,7 +10,10 @@ const Scheduler = props => {
         width={props.width}
         date={props.date}
         colors={props.colors}
-        handleClick={() => setIsOpen(!isOpen)}
+        handleClick={(weekDay,month,date) => {
+          setIsOpen(!isOpen)
+          console.log(weekDay,month,date)
+        }}
       />
       <div 
         id="sch-modal"
