@@ -11,7 +11,7 @@ class App extends Component {
         <Scheduler
           width={200}
           date={new Date()}
-          colors={colorTheme.purplenight}
+          colors={colorTheme.redflat}
           form={<MyForm />}
         />
       </div>

@@ -22,6 +22,7 @@ const input3 = ({ field, form }) => { return (
 )}
 
 const getSuffix = date => {
+  if (date >= 10 && date < 21) return "th"
   const string = date.toString().split('').pop()
   switch (string) {
     case "1":
@@ -35,7 +36,7 @@ const getSuffix = date => {
   }
 }
 
-const MyForm = ({weekDay,month,date,handleClick}) => {
+const MyForm = ({weekDay,year,month,date,handleClick}) => {
   const dateSuffix = getSuffix(date)
   return (
   <div id="sch-form" className="form-container" onClick={event => { event.stopPropagation() }}>
@@ -43,7 +44,7 @@ const MyForm = ({weekDay,month,date,handleClick}) => {
     <h1 className="form-header">{`${weekDay}, ${month} ${date}${dateSuffix}`}</h1>
     <span className="form-prompt">Provide us with your contact info <br/> to get in touch:</span>
     <Formik
-      initialValues={{ firstName: '', lastName: '', number: '', day: weekDay, month, date }}
+      initialValues={{ firstName: '', lastName: '', number: '', day: weekDay, month, date, year }}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
           alert(JSON.stringify(values, null, 2));

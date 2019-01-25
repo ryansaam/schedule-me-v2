@@ -13,7 +13,8 @@ const Calendar = props => {
   const [width,setWidth] = useState(props.width)
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
   const year = renderedDate.getFullYear()
-  const calendarData = fillCalendar(renderedDate.getMonth(), renderedDate.getFullYear())
+  const localDate = new Date()
+  const calendarData = fillCalendar(renderedDate.getMonth(), renderedDate.getFullYear(), renderedDate.getDate())
 
   const changeCalendar = event => {
     const id = event.currentTarget.id
@@ -23,7 +24,7 @@ const Calendar = props => {
       year = (month + 1 === 12) ? year + 1 : year
       month = (year === renderedDate.getFullYear()) ? month + 1 : 0
       if (month === props.date.getMonth() && year === props.date.getFullYear())
-        setRenderedDate(new Date())
+        setRenderedDate(localDate)
       else 
         setRenderedDate(new Date(year, month))
       setDegrees(degrees - 180)
@@ -32,7 +33,7 @@ const Calendar = props => {
       year = (month - 1 === -1) ? year - 1 : year
       month = (year === renderedDate.getFullYear()) ? month - 1 : 11
       if (month === props.date.getMonth() && year === props.date.getFullYear())
-        setRenderedDate(new Date())
+        setRenderedDate(localDate)
       else 
         setRenderedDate(new Date(year, month))
       setDegrees(degrees + 180)
@@ -76,6 +77,7 @@ const Calendar = props => {
           buttonColor={props.colors.calendarUI.arrowsBG}
           id={"prev"}
           onClick={changeCalendar}
+          canClick={renderedDate.getMonth() - 1 < localDate.getMonth() ? false : true}
         />
         <ControlArrow
           x={150}
@@ -85,12 +87,14 @@ const Calendar = props => {
           flipArrow
           id={"next"}
           onClick={changeCalendar}
+          canClick
         />
       </CalendarUI>
       <CalendarView width={width}>
         <WeekDayNames colors={props.colors.calendarView} height={width} />
         <DateGrid 
-          colors={props.colors.calendarView} 
+          colors={props.colors.calendarView}
+          nullNodeColor={props.colors.background}
           width={width}
           date={renderedDate}
           calendarData={calendarData}

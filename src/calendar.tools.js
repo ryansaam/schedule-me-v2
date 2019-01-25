@@ -1,8 +1,9 @@
-export const fillCalendar = (month, year) => {
+export const fillCalendar = (month, year, day) => {
   if (typeof month !== "number" || typeof year !== "number") { throw new Error("fillCalendar only accepts parameters of Type Number") }
   if (month < 0 || month > 11) { throw new Error("Invalid month index: Try [0-11]") }
   let datesArray = []
-  let monthStart = new Date(year,month,1).getDay()
+  let monthStart = new Date(year,month, day).getDay()
+  let mainLoopStart = new Date(year,month, day).getDate() - 1
   let yearType = false;
   let filledNodes = 0;
   // Check for leap year
@@ -22,14 +23,21 @@ export const fillCalendar = (month, year) => {
   }
   if (month === 12) { month = 0; }
   // Loop out month's date numbers
-  for (let i = 0; i < monthArrays[month]; i++) {
+  for (let i = mainLoopStart; i < monthArrays[month]; i++) {
     datesArray.push({date: i + 1, type: "monthDate", id: "monthDate" + i})
     filledNodes++
   }
   // fill the empty remaining cells in the calendar
+  month = (month + 1 === 12) ? 0 : month + 1
   let remainingNodes = 42 - filledNodes;
-  for (let i = 0; i < remainingNodes; i++) {
+  for (let i = 0; i < remainingNodes && i < monthArrays[month]; i++) {
     datesArray.push({date: i + 1, type: "postDate", id: "postDate" + i})
+    filledNodes++
+  }
+  // fill the empty remaining cells two months ahead in the calendar
+  remainingNodes = 42 - filledNodes;
+  for (let i = 0; i < remainingNodes; i++) {
+    datesArray.push({date: i + 1, type: "nextPostDate", id: "nextPostDate" + i})
   }
   return datesArray
 }

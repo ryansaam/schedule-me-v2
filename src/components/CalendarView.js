@@ -1,6 +1,6 @@
 import React from 'react'
 
-import DateNode, { NullDateNode } from './DateNode.js'
+import DateNode from './DateNode.js'
 
 export const WeekDayNames = props => {
   const names = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
@@ -18,6 +18,17 @@ export const WeekDayNames = props => {
   )
 }
 
+const getNextPostDateMonth = (month) => {
+  switch (month + 2) {
+    case 12:
+      return 0
+    case 13:
+      return 1
+    default:
+      return month + 2
+  }  
+} 
+
 export const DateGrid = props => {
   const monthNames = ["January","Febuary","March","April","May","June","July","August","September","October","November","December"]
   const weekDayNames = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
@@ -27,10 +38,27 @@ export const DateGrid = props => {
   let dateData = props.calendarData
   const colors = props.colors
   const dateNodes = dateData.map(el => {
+    if (
+      ((el.type === "leadDate" && renderedDate.getMonth() === localDate.getMonth()) ||
+      (el.date < renderedDate.getDate() && el.type !== "postDate") ||
+      (el.type === "leadDate" && el.date < renderedDate.getDate())) &&
+      renderedDate.getFullYear() === localDate.getFullYear() &&
+      el.type !== "nextPostDate"
+    ) return (
+      <div key={el.id}></div>
+    )
     if (el.type === "leadDate") return (
-      <NullDateNode
-        bgColor={colors.leadDate}
-        key={el.id} radius={radius}
+      <DateNode
+          textColor={colors.textColor}
+          bgColor={colors.currentDate}
+          key={el.id}
+          radius={radius}
+          number={el.date} 
+          handleClick={props.handleClick}
+          month={(renderedDate.getMonth() - 1 !== -1) ? renderedDate.getMonth() - 1 : 11}
+          monthNames={monthNames}
+          year={(renderedDate.getMonth() - 1 !== -1) ? renderedDate.getFullYear() : renderedDate.getFullYear() - 1}
+          weekDayNames={weekDayNames}
       />
     )
     if (
@@ -76,10 +104,24 @@ export const DateGrid = props => {
         radius={radius}
         number={el.date}
         handleClick={props.handleClick}
-        month={(renderedDate.getMonth() + 1 !== 11) ? renderedDate.getMonth() + 1 : 0}
+        month={(renderedDate.getMonth() + 1 !== 12) ? renderedDate.getMonth() + 1 : 0}
         monthNames={monthNames}
         weekDayNames={weekDayNames}
-        year={(renderedDate.getMonth() + 1 !== 11) ? renderedDate.getFullYear() : renderedDate.getFullYear() + 1}
+        year={(renderedDate.getMonth() + 1 !== 12) ? renderedDate.getFullYear() : renderedDate.getFullYear() + 1}
+      />
+    )
+    if (el.type === "nextPostDate") return (
+      <DateNode
+        textColor={colors.textColor}
+        bgColor={colors.monthDate}
+        key={el.id}
+        radius={radius}
+        number={el.date}
+        handleClick={props.handleClick}
+        month={getNextPostDateMonth(renderedDate.getMonth())}
+        monthNames={monthNames}
+        weekDayNames={weekDayNames}
+        year={(renderedDate.getMonth() + 2 < 11) ? renderedDate.getFullYear() : renderedDate.getFullYear() + 1}
       />
     )
     else { return null }

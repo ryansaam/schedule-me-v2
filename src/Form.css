@@ -3,6 +3,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 20px;
+  box-sizing: border-box;
   position: relative;
   padding: 20px 10px;
   width: 300px;

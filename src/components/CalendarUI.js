@@ -16,7 +16,7 @@ export const ControlArrow = props => {
   const arrowDirection = props.flipArrow ? 180 : 0
   return (
     <svg 
-      onClick={props.onClick} 
+      onClick={props.canClick ? props.onClick : null}
       x={props.x} 
       y={props.y} 
       viewBox="0 0 50 30" 
@@ -26,7 +26,13 @@ export const ControlArrow = props => {
     >
       <rect style={{fill: props.buttonColor, width: "50", height: "30", rx: "15"}}/>
       <path d="M 15, 12 h 30, 0 v 0, 5 h -30, 0 l 5, 8 h -6, 0 l -8, -10 l 8, -10 h 6, 0 z"
-      style={{fill: props.arrowColor, transformOrigin: "50% 50%", transform: `rotateY(${arrowDirection}deg)`}}/>
+      style={{
+        fill: props.arrowColor,
+        transformOrigin: "50% 50%",
+        transform: `rotateY(${arrowDirection}deg)`,
+        opacity: props.canClick ? "1" : "0",
+        transition: "opacity ease-in 300ms"
+      }}/>
     </svg>
   )
 }

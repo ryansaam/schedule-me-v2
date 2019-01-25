@@ -5,9 +5,9 @@ import '../Calendar.css'
 const Scheduler = props => {
   const [isOpen, setIsOpen] = useState(false)
   const [nodeData, setNodeData] = useState(null)
-  const handleClick = (weekDay,month,date) => {
+  const handleClick = (weekDay,month,date,year) => {
     setIsOpen(!isOpen)
-    setNodeData({weekDay,month,date})
+    setNodeData({weekDay,month,date,year})
   }
   const form = React.cloneElement(props.form, {...nodeData, handleClick})
   return (
