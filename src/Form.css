@@ -1,11 +1,16 @@
 .form-container {
-  background-color: #fff;
-  width: 20%;
+  background-image: url("./formbackground.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 20px;
+  position: relative;
+  padding: 20px 10px;
+  width: 300px;
   box-shadow: 3px 3px 5px 6px rgba(0,0,0,0.3);
+  font-family: 'Poppins', sans-serif;
 }
 
 .form-header {
-  background-color: #000;
   color: #fff;
   font-size: 24px;
   text-align: center;
@@ -15,9 +20,25 @@
   margin-block-end: 0px;
 }
 
+.form-prompt {
+  color: #d1d1d1;
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 10px;
+  display: block;
+}
+
 .inputs {
-  margin-left: 20px;
-  margin-bottom: 5px;
+  text-align: center;
+  padding-bottom: 10px;
+}
+.inputs input {
+  border: none;
+  border-radius: 5px;
+  width: 200px;
+  height: 30px;
+  padding-left: 10px;
+  font-size: 18px;
 }
 
 .button-container {
@@ -26,13 +47,14 @@
 }
 
 .description-btn {
-  background: black;
+  background: rgb(83, 83, 83);
   color: white;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
   position: relative;
   width: 80px;
   height: 30px;
-  margin-top: 10px;
-  margin-left: 20px;
+  margin: auto;
   border: 1px solid #c1c1c1;
   border-radius: 50px 50px;
   outline: none;

@@ -1,0 +1,22 @@
+<svg viewBox="0 0 80 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="shadow">
+      <stop offset="0%"  stop-color="black"/>
+      <stop offset="100%" stop-color="white"/>
+    </linearGradient>
+    <linearGradient id="form-shade" gradientTransform="rotate(90)">
+      <stop offset="0%"  stop-color="rgba(0,0,0,0.4)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0.4)"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="80" height="100" fill="#ffffff" />
+  <circle r="50" fill="#494949" />
+  <polygon points="80, 0 80, 30 50, 0" fill="#dad4d4" />
+  <polygon points="50, 0 80, 30 80, 50 30, 0" fill="#ff0000" />
+  <polygon points="55, 0 80, 25 80, 30 50, 0" fill="url(#shadow)" />
+  <polygon points="25, 0 80, 50 80, 75 5, 0" fill="#ff0000" />
+  <polygon points="30, 0 80, 50 80, 55 25, 0" fill="url(#shadow)" />
+  <polygon points="80, 75 80, 100 50, 100" />
+  <polygon points="80, 75 80, 100 50, 100" fill="#494949" />
+  <rect x="0" y="0" width="80" height="100" fill="url(#form-shade)" />
+</svg>

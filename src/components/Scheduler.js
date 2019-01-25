@@ -1,9 +1,6 @@
 import React, { useState } from 'react'
 import Calendar from './Calendar.js'
 import '../Calendar.css'
-const Form = props => { 
-  return <div style={{width: "100%"}}>{props.form}</div>
-}
 
 const Scheduler = props => {
   const [isOpen, setIsOpen] = useState(false)
@@ -12,7 +9,7 @@ const Scheduler = props => {
     setIsOpen(!isOpen)
     setNodeData({weekDay,month,date})
   }
-  const form = React.cloneElement(props.form, {...nodeData})
+  const form = React.cloneElement(props.form, {...nodeData, handleClick})
   return (
     <div>
       <Calendar
