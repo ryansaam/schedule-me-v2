@@ -24,7 +24,7 @@ export const ControlArrow = props => {
       height="30"
       id={props.id}
     >
-      <rect style={{fill: props.buttonColor, width: "50", height: "30", rx: "15"}}/>
+      <rect rx="15" style={{fill: props.buttonColor, width: "50", height: "30"}}/>
       <path d="M 15, 12 h 30, 0 v 0, 5 h -30, 0 l 5, 8 h -6, 0 l -8, -10 l 8, -10 h 6, 0 z"
       style={{
         fill: props.arrowColor,
@@ -42,7 +42,7 @@ const CalendarUI = props => {
   return (
     <div>
       <svg viewBox="0 0 200 70" xmlns="http://www.w3.org/2000/svg">
-        <rect style={{fill: props.colors.currentDateBG, width: "200", height: "30", rx: "15"}} />
+        <rect rx="15" style={{fill: props.colors.currentDateBG, width: "200", height: "30"}} />
         <path d="M 100, 30 h 50, 0 c 0, 10, 0, 25, -25, 25 h -50, 0 c -10, 0, -25, 0, -25, -25 h 50, 0 z" 
         style={{fill: props.colors.monthYearViewBG}}/>
         <text id="full-date-view" x="34" y="20" style={{fill: props.colors.textColor}}>{localDate.toDateString()}</text>
